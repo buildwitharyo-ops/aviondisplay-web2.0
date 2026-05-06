@@ -45,11 +45,10 @@ export default function AXSeriesSection() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           style={{
-            display: "grid",
             gap: "4rem",
             alignItems: "center",
           }}
-          className="grid-cols-1 md:grid-cols-2"
+          className="grid grid-cols-1 md:grid-cols-2"
         >
           {/* LEFT — Image + size chips */}
           <motion.div variants={fadeUp} style={{ position: "relative" }}>
@@ -75,6 +74,8 @@ export default function AXSeriesSection() {
               left: "50%",
               transform: "translateX(-50%)",
               display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
               gap: "0.5rem",
               zIndex: 2,
             }}>
@@ -147,11 +148,9 @@ export default function AXSeriesSection() {
 
             {/* Highlights row */}
             <motion.div variants={fadeUp} style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
               gap: "0.75rem",
             }}
-              className="grid-cols-2 sm:grid-cols-4"
+              className="grid grid-cols-2 sm:grid-cols-4"
             >
               {HIGHLIGHTS.map(({ value, label }) => (
                 <div key={label} className="glass" style={{

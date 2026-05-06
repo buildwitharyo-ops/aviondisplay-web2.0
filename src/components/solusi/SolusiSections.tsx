@@ -285,15 +285,14 @@ function SolutionSection({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className={`grid grid-cols-1 lg:grid-cols-2`}
+          className="grid grid-cols-1 lg:grid-cols-2"
           style={{
             gap: "4rem",
             alignItems: "center",
-            direction: flip ? "rtl" : "ltr",
           }}
         >
           {/* Content */}
-          <motion.div variants={contentMotion} style={{ direction: "ltr", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <motion.div variants={contentMotion} className={flip ? "lg:order-last" : ""} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
             {/* Number + category */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
               <span style={{
@@ -412,7 +411,7 @@ function SolutionSection({
           </motion.div>
 
           {/* Visual */}
-          <motion.div variants={visualMotion} style={{ direction: "ltr" }}>
+          <motion.div variants={visualMotion} className={flip ? "lg:order-first" : ""}>
             {visual}
           </motion.div>
         </motion.div>

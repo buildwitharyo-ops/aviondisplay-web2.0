@@ -45,12 +45,10 @@ export default function FeaturedProduct() {
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
             gap: "4rem",
             alignItems: "center",
           }}
-          className="grid-cols-1 md:grid-cols-2"
+          className="grid grid-cols-1 md:grid-cols-2"
         >
           {/* Left — Image */}
           <motion.div
@@ -152,12 +150,10 @@ export default function FeaturedProduct() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1rem",
             marginTop: "4rem",
           }}
-          className="grid-cols-2 md:grid-cols-3"
+          className="grid grid-cols-2 md:grid-cols-3"
         >
           {GRID_FEATURES.map(({ label }) => (
             <motion.div key={label} variants={fadeUp} className="glass" style={{

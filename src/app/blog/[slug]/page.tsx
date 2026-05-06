@@ -180,7 +180,7 @@ export default async function BlogPostPage({
         </header>
 
         {/* Cover image */}
-        <div style={{ position: "relative", aspectRatio: "21/9", borderRadius: 16, overflow: "hidden", marginBottom: "3rem" }}>
+        <div className="aspect-video lg:aspect-[21/9]" style={{ position: "relative", borderRadius: 16, overflow: "hidden", marginBottom: "3rem" }}>
           <Image
             src={post.coverImage}
             alt={post.title}

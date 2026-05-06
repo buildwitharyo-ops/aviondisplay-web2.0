@@ -89,12 +89,11 @@ type FormState = "idle" | "loading" | "success" | "error";
 function InfoPanel() {
   return (
     <div
+      className="lg:sticky lg:top-24"
       style={{
         display: "flex",
         flexDirection: "column",
         gap: "1.5rem",
-        position: "sticky",
-        top: "6rem",
       }}
     >
       {/* WhatsApp CTA */}

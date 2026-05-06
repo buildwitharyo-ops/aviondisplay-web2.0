@@ -10,10 +10,8 @@ export function FeaturedCard({ post }: { post: Post }) {
   return (
     <Link href={`/blog/${post.slug}`} style={{ display: "block", textDecoration: "none" }}>
       <article
-        className="flex-col md:grid"
+        className="grid grid-cols-1 md:grid-cols-2"
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
           background: "var(--surface)",
           border: "1px solid var(--border)",
           borderRadius: 20,

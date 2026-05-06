@@ -137,7 +137,7 @@ export default function DigitalSignageSection() {
               Kelola jaringan display Anda dari satu dashboard cloud yang powerful. Jadwalkan konten, monitor performa layar secara real-time, dan perbarui pesan ke seluruh lokasi seketika — tanpa perlu hadir di tempat. Ideal untuk retail, hotel, rumah sakit, dan gedung perkantoran dengan kebutuhan komunikasi visual yang dinamis.
             </motion.p>
 
-            <motion.div variants={fadeUp} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }} className="grid-cols-2 sm:grid-cols-4">
+            <motion.div variants={fadeUp} style={{ gap: "0.75rem" }} className="grid grid-cols-2 sm:grid-cols-4">
               {HIGHLIGHTS.map(({ value, label }) => (
                 <div key={label} className="glass" style={{ padding: "0.9rem 0.75rem", borderRadius: 12, textAlign: "center" }}>
                   <p style={{ fontFamily: "var(--font-syne)", fontSize: "1rem", fontWeight: 700, color: "#38bdf8", lineHeight: 1.2, marginBottom: "0.2rem" }}>{value}</p>

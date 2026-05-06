@@ -61,11 +61,9 @@ export default function TrustSection() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1.5rem",
           }}
-          className="grid-cols-1 md:grid-cols-3"
+          className="grid grid-cols-1 md:grid-cols-3"
         >
           {ITEMS.map(({ num, title, desc }) => (
             <motion.div

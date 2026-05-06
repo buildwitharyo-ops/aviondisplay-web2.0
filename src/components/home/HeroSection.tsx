@@ -54,12 +54,10 @@ export default function HeroSection() {
           margin: "0 auto",
           padding: "0 1.5rem",
           width: "100%",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
           gap: "3rem",
           alignItems: "center",
         }}
-        className="grid-cols-1 md:grid-cols-2"
+        className="grid grid-cols-1 md:grid-cols-2"
       >
         {/* Left — Text content */}
         <motion.div
@@ -216,12 +214,10 @@ export default function HeroSection() {
           <motion.div
             variants={fadeUp}
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
               gap: "0.75rem",
               marginTop: "0.5rem",
             }}
-            className="grid-cols-2 sm:grid-cols-4"
+            className="grid grid-cols-2 sm:grid-cols-4"
           >
             {STATS.map(({ value, label }) => (
               <div

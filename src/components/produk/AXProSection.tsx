@@ -80,8 +80,8 @@ export default function AXProSection() {
 
             {/* Highlights */}
             <motion.div variants={fadeUp} style={{
-              display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem",
-            }} className="grid-cols-2 sm:grid-cols-4">
+              gap: "0.75rem",
+            }} className="grid grid-cols-2 sm:grid-cols-4">
               {HIGHLIGHTS.map(({ value, label }) => (
                 <div key={label} className="glass" style={{
                   padding: "0.9rem 0.75rem", borderRadius: 12, textAlign: "center",

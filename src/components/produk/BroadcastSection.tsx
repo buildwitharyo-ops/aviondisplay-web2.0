@@ -130,7 +130,7 @@ export default function BroadcastSection() {
               Perangkat broadcast profesional yang memudahkan siaran langsung berkualitas 4K ke berbagai platform sekaligus. Dengan encoder hardware bertenaga tinggi, input HDMI dan SDI, serta latensi ultra-rendah — ideal untuk acara korporat, webinar, siaran kampus, dan produksi konten skala besar.
             </motion.p>
 
-            <motion.div variants={fadeUp} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }} className="grid-cols-2 sm:grid-cols-4">
+            <motion.div variants={fadeUp} style={{ gap: "0.75rem" }} className="grid grid-cols-2 sm:grid-cols-4">
               {HIGHLIGHTS.map(({ value, label }) => (
                 <div key={label} className="glass" style={{ padding: "0.9rem 0.75rem", borderRadius: 12, textAlign: "center" }}>
                   <p style={{ fontFamily: "var(--font-syne)", fontSize: "1rem", fontWeight: 700, color: "var(--red)", lineHeight: 1.2, marginBottom: "0.2rem" }}>{value}</p>

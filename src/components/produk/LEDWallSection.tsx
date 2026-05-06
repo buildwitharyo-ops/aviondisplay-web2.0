@@ -112,7 +112,7 @@ export default function LEDWallSection() {
               Dari instalasi indoor resolusi tinggi di lobby dan auditorium, hingga LED wall outdoor tahan cuaca skala besar untuk billboard dan venue event — AVION LED Wall menghadirkan visual yang memukau di segala kondisi. Panel modular memungkinkan ukuran dan bentuk custom tanpa batas, dengan brightness hingga 5000 nits untuk keterbacaan optimal di siang hari.
             </motion.p>
 
-            <motion.div variants={fadeUp} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }} className="grid-cols-2 sm:grid-cols-4">
+            <motion.div variants={fadeUp} style={{ gap: "0.75rem" }} className="grid grid-cols-2 sm:grid-cols-4">
               {HIGHLIGHTS.map(({ value, label }) => (
                 <div key={label} className="glass" style={{ padding: "0.9rem 0.75rem", borderRadius: 12, textAlign: "center" }}>
                   <p style={{ fontFamily: "var(--font-syne)", fontSize: "1rem", fontWeight: 700, color: "#6ee7b7", lineHeight: 1.2, marginBottom: "0.2rem" }}>{value}</p>
