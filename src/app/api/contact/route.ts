@@ -56,10 +56,12 @@ export async function POST(req: NextRequest) {
       );
 
       if (!tgRes.ok) {
-        console.error("Telegram send failed:", await tgRes.text());
+        const errText = await tgRes.text();
+        console.error("[Contact API] Telegram send failed:", errText);
+        return NextResponse.json({ error: "Failed to send notification" }, { status: 502 });
       }
     } else {
-      // Dev fallback — log to console
+      console.warn("[Contact API] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set — message not forwarded.");
       console.log("[Contact Form]", { nama, perusahaan, email, telepon, produk, pesan });
     }
 
