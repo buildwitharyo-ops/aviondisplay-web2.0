@@ -220,7 +220,7 @@ Paragraf...
 \`\`\`
 
 *Format /deletepost:*
-\`/deletepost nama-slug-artikel\``;
+\`/deletepost https://aviondisplay.com/blog/slug-artikel\``;
 
 /* ── Types ── */
 interface TelegramPhoto {
@@ -297,17 +297,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
-    /* ── /deletepost [slug] ── */
+    /* ── /deletepost [url or slug] ── */
     if (text.startsWith("/deletepost")) {
       if (!GITHUB_TOKEN) {
         await sendTg(chatId, "❌ `GITHUB_TOKEN` belum dikonfigurasi.");
         return NextResponse.json({ ok: true });
       }
 
-      const slug = text.replace(/^\/deletepost\s*/i, "").trim();
-      if (!slug) {
-        await sendTg(chatId, "❌ Format: `/deletepost nama-slug-artikel`");
+      const raw = text.replace(/^\/deletepost\s*/i, "").trim();
+      if (!raw) {
+        await sendTg(chatId, "❌ Format: `/deletepost https://aviondisplay.com/blog/slug-artikel`");
         return NextResponse.json({ ok: true });
+      }
+
+      // Extract slug whether user pastes full URL or just the slug
+      let slug = raw;
+      try {
+        const url = new URL(raw);
+        const parts = url.pathname.split("/").filter(Boolean);
+        slug = parts[parts.length - 1];
+      } catch {
+        // raw is already a slug, use as-is
       }
 
       const filePath = `src/content/blog/${slug}.mdx`;
