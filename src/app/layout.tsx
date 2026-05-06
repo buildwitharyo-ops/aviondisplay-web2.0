@@ -50,9 +50,25 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: "https://aviondisplay.com",
     siteName: "AVION Display",
-    images: [{ url: "/assets/image/AVION HOME.png", width: 1200, height: 630 }],
+    title: "AVION Display — Interactive Flat Panel & AV Solutions Indonesia",
+    description:
+      "AVION Display menghadirkan Interactive Flat Panel 4K, Digital Signage, LED Wall, dan solusi AV enterprise terbaik di Indonesia. Konsultasi gratis untuk kebutuhan display Anda.",
+    images: [
+      {
+        url: "/assets/image/og-home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AVION Display — Interactive Flat Panel & AV Solutions Indonesia",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: "AVION Display — Interactive Flat Panel & AV Solutions Indonesia",
+    description:
+      "AVION Display menghadirkan Interactive Flat Panel 4K, Digital Signage, LED Wall, dan solusi AV enterprise terbaik di Indonesia.",
+    images: ["/assets/image/og-home.jpg"],
+  },
   robots: { index: true, follow: true },
   verification: { google: "PLACEHOLDER_GOOGLE_VERIFICATION" },
 };
