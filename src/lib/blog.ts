@@ -36,7 +36,7 @@ export async function getAllPosts(): Promise<Post[]> {
   });
 
   return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
@@ -44,4 +44,3 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const posts = await getAllPosts();
   return posts.find((p) => p.slug === slug) || null;
 }
-
