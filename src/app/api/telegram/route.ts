@@ -28,10 +28,86 @@ async function sendTg(chatId: string, text: string) {
   });
 }
 
-async function commitToGitHub(filePath: string, content: string, commitMsg: string) {
-  const encoded = Buffer.from(content).toString("base64");
+async function githubRequest(filePath: string, method: string, body: object) {
   return fetch(
     `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`,
+    {
+      method,
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json",
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify(body),
+    }
+  );
+}
+
+async function getFileSha(filePath: string): Promise<string | null> {
+  const res = await fetch(
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`,
+    {
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
+  if (!res.ok) return null;
+  const data = await res.json() as { sha?: string };
+  return data.sha ?? null;
+}
+
+async function commitToGitHub(filePath: string, content: string, commitMsg: string) {
+  const encoded = Buffer.from(content).toString("base64");
+  return githubRequest(filePath, "PUT", { message: commitMsg, content: encoded, branch: "main" });
+}
+
+async function deleteFromGitHub(filePath: string, sha: string, commitMsg: string) {
+  return githubRequest(filePath, "DELETE", { message: commitMsg, sha, branch: "main" });
+}
+
+/* ── Image upload via Telegram ── */
+async function handlePhoto(chatId: string, message: TelegramMessage) {
+  if (!GITHUB_TOKEN) {
+    await sendTg(chatId, "❌ `GITHUB_TOKEN` belum dikonfigurasi.");
+    return;
+  }
+
+  // Pick highest-resolution photo
+  const photos = message.photo!;
+  const photo = photos[photos.length - 1];
+  const caption = message.caption ?? "";
+
+  // Get file path from Telegram
+  const fileRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getFile?file_id=${photo.file_id}`);
+  const fileData = await fileRes.json() as { ok: boolean; result?: { file_path?: string } };
+  if (!fileData.ok || !fileData.result?.file_path) {
+    await sendTg(chatId, "❌ Gagal mengambil file dari Telegram.");
+    return;
+  }
+
+  const tgFilePath = fileData.result.file_path;
+  const ext = tgFilePath.split(".").pop() ?? "jpg";
+  const fileName = caption
+    ? `${slugify(caption)}.${ext}`
+    : `blog-${Date.now()}.${ext}`;
+
+  // Download from Telegram
+  const dlRes = await fetch(`https://api.telegram.org/file/bot${BOT_TOKEN}/${tgFilePath}`);
+  if (!dlRes.ok) {
+    await sendTg(chatId, "❌ Gagal mendownload gambar dari Telegram.");
+    return;
+  }
+  const buffer = await dlRes.arrayBuffer();
+  const encoded = Buffer.from(buffer).toString("base64");
+
+  // Upload to GitHub
+  const ghPath = `public/blog-images/${fileName}`;
+  const ghRes = await fetch(
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ghPath}`,
     {
       method: "PUT",
       headers: {
@@ -40,26 +116,27 @@ async function commitToGitHub(filePath: string, content: string, commitMsg: stri
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
       },
-      body: JSON.stringify({ message: commitMsg, content: encoded, branch: "main" }),
+      body: JSON.stringify({
+        message: `content: upload blog image ${fileName}`,
+        content: encoded,
+        branch: "main",
+      }),
     }
   );
+
+  if (ghRes.ok) {
+    const imgPath = `/blog-images/${fileName}`;
+    await sendTg(
+      chatId,
+      `✅ *Gambar berhasil diupload!*\n\nGunakan path ini di CoverImage atau konten artikel:\n\`${imgPath}\`\n\nContoh di markdown:\n\`![Alt text](${imgPath})\``
+    );
+  } else {
+    const err = await ghRes.json().catch(() => ({})) as { message?: string };
+    await sendTg(chatId, `❌ Gagal upload ke GitHub: \`${err.message ?? `HTTP ${ghRes.status}`}\``);
+  }
 }
 
-/* ── Parser ──
-   Format:
-   /newpost
-   Judul: ...
-   Kategori: ...
-   Tags: tag1, tag2
-   Excerpt: ...
-   ReadTime: 5
-   CoverImage: /assets/image/...
-   Penulis: Tim AVION   (opsional)
-
-   ---
-
-   Isi konten markdown...
-*/
+/* ── Blog post parser ── */
 function parsePost(text: string) {
   const body = text.replace(/^\/newpost\s*/i, "").trim();
   const sep = body.indexOf("\n---");
@@ -111,49 +188,82 @@ ${p.content}
 `;
 }
 
+/* ── Help text ── */
 const HELP_TEXT = `🤖 *AVION Web Bot*
 
 *Commands:*
 /newpost — Publish blog post baru
-/help — Tampilkan panduan ini
+/deletepost \\[slug\\] — Hapus blog post
+/help — Panduan ini
+
+*Upload Gambar:*
+Kirim foto ke bot (dengan caption = nama file opsional).
+Bot akan upload ke GitHub dan balas dengan path-nya.
 
 *Format /newpost:*
 \`\`\`
 /newpost
 Judul: Judul Artikel Anda
 Kategori: Interactive Display
-Tags: smartboard, tips, panduan
-Excerpt: Ringkasan singkat artikel ini.
+Tags: smartboard, tips
+Excerpt: Ringkasan singkat.
 ReadTime: 5
-CoverImage: /assets/image/AVION HOME.png
+CoverImage: /blog-images/nama-gambar.jpg
 Penulis: Tim AVION
 
 ---
 
-Tulis isi artikel di sini menggunakan **markdown**.
+Isi artikel **markdown** di sini.
 
 ## Subjudul
-Paragraf konten...
-\`\`\``;
+Paragraf...
+\`\`\`
+
+*Format /deletepost:*
+\`/deletepost nama-slug-artikel\``;
+
+/* ── Types ── */
+interface TelegramPhoto {
+  file_id: string;
+  file_unique_id: string;
+  width: number;
+  height: number;
+}
+
+interface TelegramMessage {
+  chat: { id: number };
+  text?: string;
+  caption?: string;
+  photo?: TelegramPhoto[];
+}
 
 /* ── Route Handler ── */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const message = body?.message;
+    const message: TelegramMessage | undefined = body?.message;
     if (!message) return NextResponse.json({ ok: true });
 
     const chatId = String(message.chat?.id);
-    const text: string = message.text ?? "";
 
     // Only respond to authorized user
     if (chatId !== AUTHORIZED_CHAT_ID) return NextResponse.json({ ok: true });
 
+    const text = message.text ?? "";
+
+    /* ── Photo upload ── */
+    if (message.photo?.length) {
+      await handlePhoto(chatId, message);
+      return NextResponse.json({ ok: true });
+    }
+
+    /* ── /help or /start ── */
     if (text === "/start" || text === "/help") {
       await sendTg(chatId, HELP_TEXT);
       return NextResponse.json({ ok: true });
     }
 
+    /* ── /newpost ── */
     if (text.startsWith("/newpost")) {
       if (!GITHUB_TOKEN) {
         await sendTg(chatId, "❌ `GITHUB_TOKEN` belum dikonfigurasi di environment variables.");
@@ -165,31 +275,63 @@ export async function POST(req: NextRequest) {
         post = parsePost(text);
       } catch (e) {
         const msg = e instanceof Error ? e.message : "Format tidak valid.";
-        await sendTg(chatId, `❌ *Error:* ${msg}\n\nKetik /help untuk melihat format yang benar.`);
+        await sendTg(chatId, `❌ *Error:* ${msg}\n\nKetik /help untuk format yang benar.`);
         return NextResponse.json({ ok: true });
       }
 
       await sendTg(chatId, `⏳ Memproses post *"${post.title}"*...`);
 
-      const mdx = buildMdx(post);
       const filePath = `src/content/blog/${post.slug}.mdx`;
-      const ghRes = await commitToGitHub(filePath, mdx, `content: add blog post "${post.title}"`);
+      const ghRes = await commitToGitHub(filePath, buildMdx(post), `content: add blog post "${post.title}"`);
 
       if (ghRes.ok) {
         await sendTg(
           chatId,
-          `✅ *Post berhasil dipublish!*\n\n📝 *${post.title}*\n📅 ${post.date}\n🔗 aviondisplay.com/blog/${post.slug}\n\n_Vercel sedang deploy, estimasi 1–2 menit._`
+          `✅ *Post berhasil dipublish!*\n\n📝 *${post.title}*\n📅 ${post.date}\n🔗 aviondisplay.com/blog/${post.slug}\n\n_Vercel deploy ~1–2 menit._`
         );
       } else {
-        const err = await ghRes.json().catch(() => ({}));
-        const errMsg = (err as { message?: string }).message ?? `HTTP ${ghRes.status}`;
-        await sendTg(chatId, `❌ Gagal commit ke GitHub: \`${errMsg}\``);
+        const err = await ghRes.json().catch(() => ({})) as { message?: string };
+        await sendTg(chatId, `❌ Gagal commit ke GitHub: \`${err.message ?? `HTTP ${ghRes.status}`}\``);
       }
 
       return NextResponse.json({ ok: true });
     }
 
-    // Unknown command
+    /* ── /deletepost [slug] ── */
+    if (text.startsWith("/deletepost")) {
+      if (!GITHUB_TOKEN) {
+        await sendTg(chatId, "❌ `GITHUB_TOKEN` belum dikonfigurasi.");
+        return NextResponse.json({ ok: true });
+      }
+
+      const slug = text.replace(/^\/deletepost\s*/i, "").trim();
+      if (!slug) {
+        await sendTg(chatId, "❌ Format: `/deletepost nama-slug-artikel`");
+        return NextResponse.json({ ok: true });
+      }
+
+      const filePath = `src/content/blog/${slug}.mdx`;
+      await sendTg(chatId, `⏳ Menghapus post \`${slug}\`...`);
+
+      const sha = await getFileSha(filePath);
+      if (!sha) {
+        await sendTg(chatId, `❌ Post \`${slug}\` tidak ditemukan.\n\nPastikan slug sudah benar.`);
+        return NextResponse.json({ ok: true });
+      }
+
+      const ghRes = await deleteFromGitHub(filePath, sha, `content: delete blog post "${slug}"`);
+
+      if (ghRes.ok) {
+        await sendTg(chatId, `✅ Post \`${slug}\` berhasil dihapus!\n\n_Vercel deploy ~1–2 menit._`);
+      } else {
+        const err = await ghRes.json().catch(() => ({})) as { message?: string };
+        await sendTg(chatId, `❌ Gagal hapus dari GitHub: \`${err.message ?? `HTTP ${ghRes.status}`}\``);
+      }
+
+      return NextResponse.json({ ok: true });
+    }
+
+    /* ── Unknown ── */
     await sendTg(chatId, "Ketik /help untuk melihat daftar commands.");
     return NextResponse.json({ ok: true });
   } catch (err) {
