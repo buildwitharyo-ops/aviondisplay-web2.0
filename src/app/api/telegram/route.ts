@@ -5,6 +5,9 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_OWNER = process.env.GITHUB_OWNER ?? "buildwitharyo-ops";
 const GITHUB_REPO = process.env.GITHUB_REPO ?? "aviondisplay-web2.0";
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const SUPABASE_BUCKET = process.env.SUPABASE_BUCKET ?? "blog-images";
 
 /* ── Helpers ── */
 
@@ -69,10 +72,10 @@ async function deleteFromGitHub(filePath: string, sha: string, commitMsg: string
   return githubRequest(filePath, "DELETE", { message: commitMsg, sha, branch: "main" });
 }
 
-/* ── Image upload via Telegram ── */
+/* ── Image upload via Telegram → Supabase Storage ── */
 async function handlePhoto(chatId: string, message: TelegramMessage) {
-  if (!GITHUB_TOKEN) {
-    await sendTg(chatId, "❌ `GITHUB_TOKEN` belum dikonfigurasi.");
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+    await sendTg(chatId, "❌ `SUPABASE_URL` atau `SUPABASE_SERVICE_KEY` belum dikonfigurasi.");
     return;
   }
 
@@ -91,6 +94,7 @@ async function handlePhoto(chatId: string, message: TelegramMessage) {
 
   const tgFilePath = fileData.result.file_path;
   const ext = tgFilePath.split(".").pop() ?? "jpg";
+  const mimeType = ext === "png" ? "image/png" : ext === "webp" ? "image/webp" : "image/jpeg";
   const fileName = caption
     ? `${slugify(caption)}.${ext}`
     : `blog-${Date.now()}.${ext}`;
@@ -102,37 +106,30 @@ async function handlePhoto(chatId: string, message: TelegramMessage) {
     return;
   }
   const buffer = await dlRes.arrayBuffer();
-  const encoded = Buffer.from(buffer).toString("base64");
 
-  // Upload to GitHub
-  const ghPath = `public/blog-images/${fileName}`;
-  const ghRes = await fetch(
-    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ghPath}`,
+  // Upload to Supabase Storage
+  const uploadRes = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${fileName}`,
     {
-      method: "PUT",
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
+        Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
+        "Content-Type": mimeType,
+        "x-upsert": "true", // overwrite if same filename
       },
-      body: JSON.stringify({
-        message: `content: upload blog image ${fileName}`,
-        content: encoded,
-        branch: "main",
-      }),
+      body: buffer,
     }
   );
 
-  if (ghRes.ok) {
-    const imgPath = `/blog-images/${fileName}`;
+  if (uploadRes.ok) {
+    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${fileName}`;
     await sendTg(
       chatId,
-      `✅ *Gambar berhasil diupload!*\n\nGunakan path ini di CoverImage atau konten artikel:\n\`${imgPath}\`\n\nContoh di markdown:\n\`![Alt text](${imgPath})\``
+      `✅ *Gambar berhasil diupload ke Supabase!*\n\nGunakan URL ini di CoverImage atau konten artikel:\n\`${publicUrl}\`\n\nContoh di markdown:\n\`![Alt text](${publicUrl})\``
     );
   } else {
-    const err = await ghRes.json().catch(() => ({})) as { message?: string };
-    await sendTg(chatId, `❌ Gagal upload ke GitHub: \`${err.message ?? `HTTP ${ghRes.status}`}\``);
+    const err = await uploadRes.json().catch(() => ({})) as { message?: string; error?: string };
+    await sendTg(chatId, `❌ Gagal upload ke Supabase: \`${err.message ?? err.error ?? `HTTP ${uploadRes.status}`}\``);
   }
 }
 
