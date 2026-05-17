@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createSupabaseStorageUploadRequest } from "./supabase-storage";
 
 const AUTHORIZED_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -108,24 +109,26 @@ async function handlePhoto(chatId: string, message: TelegramMessage) {
   const buffer = await dlRes.arrayBuffer();
 
   // Upload to Supabase Storage
-  const uploadRes = await fetch(
-    `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${fileName}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
-        "Content-Type": mimeType,
-        "x-upsert": "true", // overwrite if same filename
-      },
-      body: buffer,
-    }
-  );
+  const uploadRequest = createSupabaseStorageUploadRequest({
+    rawUrl: SUPABASE_URL,
+    serviceKey: SUPABASE_SERVICE_KEY,
+    bucket: SUPABASE_BUCKET,
+    fileName,
+    mimeType,
+    body: buffer,
+  });
+
+  if (!uploadRequest.ok) {
+    await sendTg(chatId, uploadRequest.message);
+    return;
+  }
+
+  const uploadRes = await fetch(uploadRequest.uploadUrl, uploadRequest.requestInit);
 
   if (uploadRes.ok) {
-    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${fileName}`;
     await sendTg(
       chatId,
-      `✅ *Gambar berhasil diupload ke Supabase!*\n\nGunakan URL ini di CoverImage atau konten artikel:\n\`${publicUrl}\`\n\nContoh di markdown:\n\`![Alt text](${publicUrl})\``
+      `✅ *Gambar berhasil diupload ke Supabase!*\n\nGunakan URL ini di CoverImage atau konten artikel:\n\`${uploadRequest.publicUrl}\`\n\nContoh di markdown:\n\`![Alt text](${uploadRequest.publicUrl})\``
     );
   } else {
     const err = await uploadRes.json().catch(() => ({})) as { message?: string; error?: string };
@@ -195,7 +198,7 @@ const HELP_TEXT = `🤖 *AVION Web Bot*
 
 *Upload Gambar:*
 Kirim foto ke bot (dengan caption = nama file opsional).
-Bot akan upload ke GitHub dan balas dengan path-nya.
+Bot akan upload ke Supabase dan balas dengan URL public-nya.
 
 *Format /newpost:*
 \`\`\`
