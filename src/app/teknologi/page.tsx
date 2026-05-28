@@ -4,11 +4,14 @@ import FeatureHighlightsSection from "@/components/teknologi/FeatureHighlightsSe
 import SmartAccessoriesSection from "@/components/teknologi/SmartAccessoriesSection";
 import CTABanner from "@/components/sections/CTABanner";
 
-export const metadata = {
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
   title: "Spesifikasi AVION AX Series — Interactive Flat Panel 4K Dual OS Indonesia",
   description:
     'Spesifikasi lengkap AVION AX Series: 4K UHD, 40-point touch, Android 14 + Intel i7 OPS, 360° audio. Tersedia ukuran 65", 75", 86", 98".',
-};
+  path: "/teknologi",
+});
 
 const TOKOPEDIA_URL =
   "https://www.tokopedia.com/aviondisplay";
@@ -33,11 +36,11 @@ export default function TeknologiPage() {
       <FeatureHighlightsSection />
       <SmartAccessoriesSection />
       <CTABanner
-        title="Ready to Experience the AX Series?"
+        title="Siap merasakan AX Series secara langsung?"
         subtitle="Konsultasikan kebutuhan ruangan Anda bersama tim AVION dan temukan konfigurasi yang tepat."
         buttonText="Konsultasi Sekarang"
         secondaryButton={{
-          label: "Order via Tokopedia",
+          label: "Pesan via Tokopedia",
           href: TOKOPEDIA_URL,
           icon: TOKOPEDIA_ICON,
         }}

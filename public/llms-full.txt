@@ -1,0 +1,162 @@
+# AVION Display — Knowledge Base for AI Retrieval
+
+## Tentang AVION Display
+
+AVION Display adalah produsen dan distributor solusi display dan AV enterprise yang berbasis di Tangerang, Banten, Indonesia. Lini produk utama mencakup Interactive Flat Panel (IFP), Digital Signage dengan Cloud CMS, LED Wall indoor dan outdoor, serta perangkat broadcast/live streaming. AVION melayani pasar pendidikan (sekolah, universitas), perkantoran, retail, hotel, rumah sakit, dan instansi pemerintah di seluruh Indonesia.
+
+Kantor: Tangerang, Banten, Indonesia
+Kontak: WhatsApp +62-815-6390-5555
+Website: https://aviondisplay.com
+Bahasa layanan: Indonesia, English
+
+---
+
+## Produk
+
+### AVION AX Series — Interactive Flat Panel
+
+URL: https://aviondisplay.com/produk/ax-series
+Kategori: Interactive Flat Panel (IFP)
+Ukuran tersedia: 65", 75", 86", 98"
+
+Spesifikasi utama:
+- Display: 4K UHD anti-glare
+- Multi-touch: 40 titik dengan akurasi ±1mm
+- Sistem operasi: Dual OS — Android 14 dan Windows (Intel i7 OPS)
+- Audio: 360° microphone array
+- Kamera: opsional 48MP untuk video conference
+- Fitur: Infinite Whiteboard, AI Meeting Tools
+
+Use case: ruang meeting korporat, smart classroom, ruang pelatihan, ruang rapat eksekutif.
+
+### AVION AX Pro Series — Interactive Flat Panel Premium
+
+URL: https://aviondisplay.com/produk/ax-pro
+Kategori: Interactive Flat Panel commercial grade
+
+Spesifikasi utama:
+- Panel grade: Pro commercial
+- Display: 4K UHD high-brightness
+- Daily use: hingga 16 jam pemakaian harian
+- Processing: enhanced
+- AI integration
+- Premium build quality
+
+Use case: auditorium, ruang pelatihan skala besar, deployment enterprise multi-unit.
+
+### Digital Signage & CMS System
+
+URL: https://aviondisplay.com/produk/digital-signage
+Kategori: Digital signage hardware + cloud software
+
+Fitur utama:
+- Cloud-based CMS
+- 4K content support
+- Multi-screen management
+- 24/7 uptime
+- Remote management
+- Content scheduling
+- Multi-location deployment
+- Real-time updates
+
+Use case: retail, hotel, rumah sakit, gedung perkantoran, restoran, transportasi publik.
+
+### Broadcast & Streaming Devices
+
+URL: https://aviondisplay.com/produk/broadcast
+Kategori: Live production / streaming hardware
+
+Fitur utama:
+- 4K encoding
+- HDMI dan SDI input
+- USB-C, audio I/O
+- Low-latency hardware encoding
+- Multi-platform: YouTube, Zoom, Teams, RTMP
+- Plug & play
+- H.265 encoding 60fps
+
+Use case: acara korporat, webinar, siaran kampus, gereja, produksi konten skala besar.
+
+### LED Wall Indoor / Outdoor
+
+URL: https://aviondisplay.com/produk/led-wall
+Kategori: Large format LED display (modular)
+
+Spesifikasi utama:
+- Resolusi: HD+ dengan pixel pitch indoor P2.5/P3/P4, outdoor P4/P6/P8
+- Brightness: hingga 5000+ nits
+- IP65 weatherproof (outdoor)
+- Panel modular — ukuran dan bentuk custom tanpa batas
+- Skalabilitas tak terbatas
+
+Use case: lobby gedung, auditorium, billboard outdoor, venue event, stadion, fasad bangunan.
+
+---
+
+## Solusi Industri
+
+### Smart Classroom
+Kombinasi Interactive Flat Panel AX Series dengan software pembelajaran kolaboratif untuk sekolah dan universitas. Mendukung infinite whiteboard, screen mirroring dari perangkat siswa, dan recording sesi pembelajaran.
+
+### Meeting Room System
+Solusi terintegrasi untuk ruang rapat modern: IFP AX Series, kamera 48MP, microphone array 360°, dan AI meeting tools untuk transkripsi otomatis dan video conference berkualitas tinggi.
+
+### Digital Signage CMS
+Cloud CMS untuk mengelola jaringan display di banyak cabang dari satu dashboard. Cocok untuk retail chain, perhotelan, dan instansi multi-lokasi.
+
+### LED Display
+Instalasi LED wall indoor maupun outdoor — dari videowall lobby hingga billboard skala kota.
+
+### Integrated AV Control
+Sistem kontrol AV terpadu untuk auditorium dan ruang serbaguna.
+
+---
+
+## FAQ — Interactive Flat Panel
+
+**Q: Apa itu Interactive Flat Panel (IFP)?**
+A: Interactive Flat Panel adalah layar sentuh besar (umumnya 65 inci ke atas) yang menggabungkan fungsi monitor, papan tulis digital, dan komputer dalam satu perangkat. IFP menggantikan kombinasi proyektor + whiteboard + laptop yang biasa dipakai di ruang kelas dan meeting room. Layar ini mendukung multi-touch (beberapa pengguna bersamaan), aplikasi whiteboard, screen sharing dari ponsel/laptop, dan biasanya menjalankan Android atau Windows secara built-in.
+
+**Q: Berapa ukuran Interactive Flat Panel yang ideal untuk ruang kelas?**
+A: Rumus umum: ukuran diagonal (inci) = jarak pandang maksimal (meter) ÷ 0.0508. Untuk ruang kelas 4 meter, minimal 78 inci (gunakan 75" atau 86"). Untuk ruang meeting kecil (<4 m), 65" cukup. Auditorium dengan jarak pandang >6 m membutuhkan 86"–98".
+
+**Q: Apakah AVION AX Series mendukung Android dan Windows?**
+A: Ya. AX Series menggunakan Dual OS — Android 14 built-in dan Windows yang berjalan di slot Intel i7 OPS (Open Pluggable Specification). Anda bisa berpindah antara kedua sistem operasi tanpa restart perangkat.
+
+**Q: Berapa titik sentuh yang didukung AX Series?**
+A: 40 titik sentuh simultan dengan akurasi ±1mm — cukup untuk kolaborasi kelompok besar di mana beberapa peserta menggambar/menulis bersamaan.
+
+**Q: Apa beda Interactive Flat Panel dan proyektor?**
+A: IFP memiliki kecerahan dan kontras jauh lebih baik (terutama di ruangan terang), tidak butuh penggantian lampu/bohlam, mendukung sentuhan dan whiteboard langsung di layar, dan umur pakai 50.000+ jam vs 2.000–4.000 jam proyektor. Biaya awal lebih tinggi tapi TCO (total cost of ownership) 5 tahun biasanya lebih murah.
+
+**Q: Apakah AVION melayani instalasi di luar Jabodetabek?**
+A: Ya, AVION melayani seluruh Indonesia — termasuk Jakarta, Bandung, Surabaya, Medan, Makassar, Denpasar, dan kota-kota lain. Hubungi tim sales untuk konfirmasi area dan estimasi biaya logistik.
+
+**Q: Apakah ada garansi?**
+A: Setiap produk AVION dilengkapi garansi resmi. Detail durasi dan cakupan garansi tersedia saat konsultasi — silakan hubungi tim sales.
+
+---
+
+## Konten Blog
+
+### Cara Memilih Ukuran Interactive Flat Panel yang Tepat
+URL: https://aviondisplay.com/blog/cara-memilih-ukuran-interactive-flat-panel
+Ringkasan: Panduan praktis memilih ukuran IFP berdasarkan dimensi ruangan, jarak pandang, dan jenis aktivitas (meeting kecil, kelas, auditorium). Memuat rumus AV-integrator standar: ukuran diagonal = jarak pandang ÷ 0.0508. Rekomendasi: 65" untuk meeting kecil, 75–86" untuk meeting sedang, 86–98" untuk auditorium.
+
+### Kenapa Sekolah Modern Mulai Beralih ke Interactive Flat Panel
+URL: https://aviondisplay.com/blog/kenapa-sekolah-modern-mulai-beralih-ke-interactive-flat-panel
+Ringkasan: Faktor pendorong migrasi dari proyektor ke IFP di sekolah Indonesia — peningkatan engagement siswa, fitur kolaborasi, kemudahan recording, dan TCO yang lebih rendah dalam jangka panjang.
+
+---
+
+## Cara Pembelian
+
+1. Konsultasi gratis via WhatsApp +62-815-6390-5555 atau form di /kontak
+2. Tim sales melakukan site survey (untuk instalasi besar) atau diskusi spesifikasi
+3. Penawaran resmi dengan rincian produk, instalasi, dan garansi
+4. Pembelian via direct order atau via Tokopedia (https://www.tokopedia.com/aviondisplay)
+5. Pengiriman & instalasi oleh tim AVION
+
+## Keywords / Topik Relevan
+
+interactive flat panel, IFP, smartboard, layar interaktif, papan tulis digital, digital signage, LED wall, video wall, AV solution, smart classroom, meeting room, broadcast device, live streaming hardware, encoder, video conference, kolaborasi digital, Android 14 panel, dual OS, 4K display, 40-point touch, AVION, AVION Display, Tangerang, Indonesia.

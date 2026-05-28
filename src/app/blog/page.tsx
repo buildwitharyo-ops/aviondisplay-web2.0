@@ -1,11 +1,15 @@
 import { getAllPosts } from "@/lib/blog";
 import { FeaturedCard, PostCard } from "@/components/blog/BlogCards";
+import { buildMetadata, SITE_URL } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
-export const metadata = {
+export const metadata = buildMetadata({
   title: "Blog AVION Display — Insight Dunia Interactive Display & AV Technology",
   description:
     "Baca artikel terbaru seputar interactive flat panel, digital signage, teknologi AV, dan tips kolaborasi modern dari tim AVION Display.",
-};
+  path: "/blog",
+});
 
 function EmptyState() {
   return (
@@ -28,8 +32,32 @@ export default async function BlogPage() {
   const posts = await getAllPosts();
   const [featured, ...rest] = posts;
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Blog AVION Display",
+    url: `${SITE_URL}/blog`,
+    inLanguage: "id-ID",
+    publisher: { "@id": `${SITE_URL}#organization` },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: `${SITE_URL}/blog/${p.slug}`,
+      datePublished: new Date(p.date).toISOString(),
+    })),
+  };
+
   return (
     <main style={{ paddingTop: "8rem", paddingBottom: "6rem" }}>
+      <JsonLd
+        data={[
+          blogSchema,
+          breadcrumbSchema([
+            { name: "Beranda", url: "/" },
+            { name: "Blog", url: "/blog" },
+          ]),
+        ]}
+      />
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem" }}>
         {/* Hero */}
         <div style={{

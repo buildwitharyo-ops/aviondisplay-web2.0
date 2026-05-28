@@ -1,0 +1,32 @@
+# AVION Display
+
+> AVION Display adalah produsen dan distributor Interactive Flat Panel, Digital Signage, LED Wall, dan solusi AV enterprise untuk pasar Indonesia. Berkantor di Tangerang, Banten, dengan layanan instalasi & konsultasi di seluruh Indonesia.
+
+Hubungi: WhatsApp +62-815-6390-5555 · https://aviondisplay.com/kontak
+
+## Produk Inti
+
+- [AVION AX Series Interactive Flat Panel](https://aviondisplay.com/produk/ax-series): Layar interaktif 4K UHD dengan multi-touch 40 titik, Dual OS (Android 14 + Intel i7 OPS), tersedia ukuran 65", 75", 86", dan 98".
+- [AVION AX Pro Series](https://aviondisplay.com/produk/ax-pro): Interactive Flat Panel premium commercial-grade untuk auditorium, ruang pelatihan besar, dan deployment enterprise. High-brightness panel, ketahanan 16 jam pemakaian harian.
+- [Digital Signage & CMS System](https://aviondisplay.com/produk/digital-signage): Cloud CMS untuk mengelola jaringan layar di banyak lokasi. Penjadwalan konten, monitoring real-time, update jarak jauh.
+- [Broadcast & Streaming Devices](https://aviondisplay.com/produk/broadcast): Hardware encoder 4K untuk live streaming ke YouTube, Zoom, Teams, RTMP. HDMI/SDI input, low-latency.
+- [LED Wall Indoor / Outdoor](https://aviondisplay.com/produk/led-wall): Panel LED modular hingga 5000 nits, IP65 weatherproof untuk indoor (P2.5/P3/P4) dan outdoor (P4/P6/P8).
+
+## Halaman Utama
+
+- [Beranda](https://aviondisplay.com/): Ringkasan AVION Display dan solusi unggulan.
+- [Produk](https://aviondisplay.com/produk): Indeks seluruh lineup produk.
+- [Solusi](https://aviondisplay.com/solusi): Smart Classroom, Meeting Room, Digital Signage CMS, LED Display, Integrated AV Control.
+- [Teknologi](https://aviondisplay.com/teknologi): Spesifikasi lengkap AVION AX Series — 4K UHD, 40-point touch, Android 14, Intel i7 OPS, 360° audio.
+- [Kontak](https://aviondisplay.com/kontak): Konsultasi gratis, demo produk, penawaran khusus.
+
+## Blog & Edukasi
+
+- [Cara Memilih Ukuran Interactive Flat Panel](https://aviondisplay.com/blog/cara-memilih-ukuran-interactive-flat-panel): Panduan menghitung ukuran IFP berdasarkan dimensi ruangan dan jarak pandang.
+- [Kenapa Sekolah Modern Beralih ke Interactive Flat Panel](https://aviondisplay.com/blog/kenapa-sekolah-modern-mulai-beralih-ke-interactive-flat-panel): Alasan IFP menggantikan proyektor di kelas modern.
+- [Indeks Blog Lengkap](https://aviondisplay.com/blog): Seluruh artikel & insight AVION.
+
+## Optional
+
+- [Sitemap XML](https://aviondisplay.com/sitemap.xml)
+- [Robots](https://aviondisplay.com/robots.txt)

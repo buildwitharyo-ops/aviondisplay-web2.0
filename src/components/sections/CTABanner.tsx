@@ -17,7 +17,7 @@ interface CTABannerProps {
 }
 
 export default function CTABanner({
-  title = "Ready to Upgrade Your Display System?",
+  title = "Siap upgrade sistem display Anda?",
   subtitle = "Hubungi tim kami dan dapatkan konsultasi gratis yang disesuaikan dengan ruangan dan anggaran Anda.",
   buttonText = "Konsultasi Sekarang",
   waUrl = WA_URL,

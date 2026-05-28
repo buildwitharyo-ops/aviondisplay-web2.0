@@ -96,7 +96,7 @@ export default function ProdukHero() {
               fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
             }}
           >
-            Every Screen.{" "}
+            Lineup Lengkap{" "}
             <span
               style={{
                 background: "var(--accent-grad)",
@@ -105,9 +105,9 @@ export default function ProdukHero() {
                 backgroundClip: "text",
               }}
             >
-              Every Space.
+              Interactive Flat Panel
             </span>
-            {" "}Every Need.
+            {" "}& Display Solutions
           </motion.h1>
 
           {/* Subtext */}

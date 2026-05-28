@@ -5,6 +5,12 @@ import SceneBackground from "@/components/ui/SceneBackground";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  organizationSchema,
+  websiteSchema,
+  localBusinessSchema,
+} from "@/lib/schema";
 import { Analytics } from "@vercel/analytics/next";
 
 const dmSans = DM_Sans({
@@ -26,6 +32,9 @@ const syne = Syne({
   display: "swap",
 });
 
+const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const BING_SITE_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://aviondisplay.com"),
   title: {
@@ -38,13 +47,18 @@ export const metadata: Metadata = {
     "interactive flat panel",
     "smartboard indonesia",
     "layar interaktif",
+    "papan tulis digital",
     "digital signage",
     "LED wall",
+    "video wall",
     "AV solution",
     "AVION display",
     "interactive display",
+    "layar interaktif sekolah",
+    "interactive flat panel jakarta",
   ],
   authors: [{ name: "AVION Display" }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -70,7 +84,16 @@ export const metadata: Metadata = {
     images: ["/assets/image/og-home.jpg"],
   },
   robots: { index: true, follow: true },
-  verification: { google: "PLACEHOLDER_GOOGLE_VERIFICATION" },
+  ...(GOOGLE_SITE_VERIFICATION || BING_SITE_VERIFICATION
+    ? {
+        verification: {
+          ...(GOOGLE_SITE_VERIFICATION ? { google: GOOGLE_SITE_VERIFICATION } : {}),
+          ...(BING_SITE_VERIFICATION
+            ? { other: { "msvalidate.01": BING_SITE_VERIFICATION } }
+            : {}),
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
@@ -84,28 +107,8 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmMono.variable} ${syne.variable}`}
     >
       <body className="min-h-full flex flex-col antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "AVION Display",
-              url: "https://aviondisplay.com",
-              logo: "https://aviondisplay.com/assets/image/NEW-AVION.png",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+62-815-6390-5555",
-                contactType: "sales",
-                availableLanguage: ["Indonesian", "English"],
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Tangerang",
-                addressCountry: "ID",
-              },
-            }),
-          }}
+        <JsonLd
+          data={[organizationSchema(), websiteSchema(), localBusinessSchema()]}
         />
         <SceneBackground />
         <Navbar />

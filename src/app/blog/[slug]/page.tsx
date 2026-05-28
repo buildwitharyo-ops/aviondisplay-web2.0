@@ -9,6 +9,9 @@ import {
   ArticleFooterCTA,
   RelatedPostCard,
 } from "@/components/blog/BlogPostClient";
+import JsonLd from "@/components/seo/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
 /* ── Static params ── */
@@ -26,15 +29,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
-  return {
+  return buildMetadata({
     title: post.title,
     description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [{ url: post.coverImage }],
-    },
-  };
+    path: `/blog/${post.slug}`,
+    image: post.coverImage,
+    imageAlt: post.title,
+    type: "article",
+    publishedTime: new Date(post.date).toISOString(),
+    authors: [post.author],
+  });
 }
 
 /* ── MDX custom components ── */
@@ -140,6 +144,23 @@ export default async function BlogPostPage({
 
   return (
     <main style={{ paddingTop: "7rem", paddingBottom: "6rem" }}>
+      <JsonLd
+        data={[
+          blogPostingSchema({
+            title: post.title,
+            description: post.excerpt,
+            image: post.coverImage,
+            slug: post.slug,
+            datePublished: new Date(post.date).toISOString(),
+            authorName: post.author,
+          }),
+          breadcrumbSchema([
+            { name: "Beranda", url: "/" },
+            { name: "Blog", url: "/blog" },
+            { name: post.title, url: `/blog/${post.slug}` },
+          ]),
+        ]}
+      />
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem" }}>
         <BackLink />
 
