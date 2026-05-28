@@ -11,7 +11,7 @@ const CASES = [
     desc: "Tingkatkan setiap sesi rapat dengan presentasi interaktif, kolaborasi real-time, dan integrasi sistem yang mulus.",
   },
   {
-    image: "/assets/image/Education AVION.png",
+    image: "/assets/image/Education-AVION.jpg",
     category: "Education",
     title: "Learning That Sticks",
     desc: "Ciptakan pengalaman belajar yang mendalam dengan interaksi langsung, visual yang hidup, dan alat pengajaran modern yang membuat siswa terus fokus.",
@@ -93,6 +93,7 @@ export default function UseCases() {
                   src={image}
                   alt={title}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   style={{ objectFit: "cover", transition: "transform 0.5s ease" }}
                 />
               </div>

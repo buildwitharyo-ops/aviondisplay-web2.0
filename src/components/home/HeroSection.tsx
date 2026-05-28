@@ -125,9 +125,10 @@ export default function HeroSection() {
             </span>
           </motion.h1>
 
-          {/* Mobile-only hero image — shown right after H1 */}
-          <motion.div
-            variants={fadeUp}
+          {/* Mobile-only hero image — shown right after H1.
+              Rendered without entry animation so it's the LCP element painted
+              immediately (no 2s elementRenderDelay from opacity:0 + JS hydration). */}
+          <div
             style={{ position: "relative", justifyContent: "center" }}
             className="flex md:hidden"
           >
@@ -147,6 +148,8 @@ export default function HeroSection() {
               width={620}
               height={480}
               priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 90vw, 480px"
               style={{
                 objectFit: "contain",
                 width: "100%",
@@ -156,7 +159,7 @@ export default function HeroSection() {
                 zIndex: 1,
               }}
             />
-          </motion.div>
+          </div>
 
           {/* Subtext */}
           <motion.p
@@ -290,11 +293,10 @@ export default function HeroSection() {
 
         </motion.div>
 
-        {/* Right — Hero image with parallax */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] as [number,number,number,number] }}
+        {/* Right — Hero image with parallax.
+            Renders at opacity 1 immediately so it's the desktop LCP element
+            painted on first frame (no JS-delayed fade-in). Parallax retained. */}
+        <div
           style={{ position: "relative", justifyContent: "center" }}
           className="hidden md:flex"
         >
@@ -316,6 +318,8 @@ export default function HeroSection() {
               width={620}
               height={480}
               priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 90vw, 620px"
               style={{
                 objectFit: "contain",
                 width: "100%",
@@ -326,7 +330,7 @@ export default function HeroSection() {
               }}
             />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator — bottom center */}
