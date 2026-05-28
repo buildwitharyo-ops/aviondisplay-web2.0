@@ -20,6 +20,7 @@ export type Product = {
   imageAlt: string;
   sku?: string;
   whatsappMessage: string;
+  faqs?: { question: string; answer: string }[];
 };
 
 export const PRODUCTS: Product[] = [
@@ -60,6 +61,38 @@ export const PRODUCTS: Product[] = [
     image: "/assets/image/AVION AX SERIES.png",
     imageAlt: "AVION AX Series Interactive Flat Panel 4K UHD",
     whatsappMessage: "Halo, saya mau bertanya tentang AVION AX Series!",
+    faqs: [
+      {
+        question: "Apa itu AVION AX Series?",
+        answer:
+          "AVION AX Series adalah Interactive Flat Panel (IFP) — layar sentuh 4K UHD berukuran 65 inci sampai 98 inci yang menggabungkan fungsi monitor, papan tulis digital, dan komputer dalam satu perangkat. AX Series menggantikan kombinasi proyektor + whiteboard + laptop yang biasa dipakai di ruang kelas dan meeting room, dengan fitur multi-touch 40 titik, Dual OS Android 14 + Windows, dan AI meeting tools bawaan.",
+      },
+      {
+        question: "Berapa ukuran AVION AX Series yang tersedia?",
+        answer:
+          'AVION AX Series tersedia dalam 4 ukuran: 65", 75", 86", dan 98". Untuk ruang meeting kecil (≤4 orang) ukuran 65" sudah cukup. Ruang meeting sedang (5–12 orang) optimal di 75" atau 86". Auditorium dan ruang pelatihan besar paling cocok dengan 98". Rumus praktis: ukuran diagonal (inci) ≈ jarak pandang maksimal (meter) ÷ 0,0508.',
+      },
+      {
+        question: "Apa beda Android 14 dan Windows OPS di AX Series?",
+        answer:
+          "AX Series memakai sistem Dual OS — Android 14 built-in untuk presentasi cepat, whiteboard, screen sharing dari ponsel, dan aplikasi ringan. Sementara Windows berjalan di slot Intel i7 OPS (Open Pluggable Specification) yang bisa dilepas-pasang, cocok untuk software Office, Zoom desktop, video editing, atau aplikasi bisnis lain. Anda bisa berpindah antara dua OS tanpa restart perangkat.",
+      },
+      {
+        question: "Berapa titik sentuh yang didukung AVION AX Series?",
+        answer:
+          "AX Series mendukung 40 titik sentuh simultan dengan akurasi ±1mm. Cukup untuk kolaborasi kelompok besar di mana beberapa peserta bisa menggambar, menulis, atau memindahkan objek di layar bersamaan tanpa lag. Mendukung deteksi jari, stylus pasif, dan eraser bawaan.",
+      },
+      {
+        question: "Apakah AVION AX Series cocok untuk video conference?",
+        answer:
+          "Ya. AX Series dilengkapi microphone array 360° untuk menangkap suara peserta dari berbagai sudut ruangan dan opsi kamera 48MP yang dapat dipasang di bagian atas panel untuk video conference berkualitas tinggi. AI meeting tools bawaan mendukung auto-framing, noise suppression, dan transkripsi otomatis untuk meeting Zoom, Teams, atau Google Meet.",
+      },
+      {
+        question: "Apakah ada garansi AVION AX Series?",
+        answer:
+          "Setiap unit AVION AX Series dilengkapi garansi resmi. Detail durasi dan cakupan garansi (sparepart, panel, OPS, instalasi) tersedia saat konsultasi. Hubungi tim AVION di +62-815-6390-5555 untuk info lengkap.",
+      },
+    ],
   },
   {
     slug: "ax-pro",
@@ -96,6 +129,33 @@ export const PRODUCTS: Product[] = [
     image: "/assets/image/AVION AX SERIES.png",
     imageAlt: "AVION AX Pro Series Interactive Flat Panel premium commercial-grade",
     whatsappMessage: "Halo, saya mau bertanya tentang AVION AX Pro Series!",
+    faqs: [
+      {
+        question: "Apa beda AVION AX Pro Series dengan AX Series standar?",
+        answer:
+          "AX Pro Series adalah versi premium commercial-grade dari AX Series. Bedanya: panel high-brightness untuk ruangan terang seperti auditorium, processor yang ditingkatkan untuk handling multi-aplikasi berat, build chassis lebih kokoh, dan rating pemakaian harian hingga 16 jam (vs 10 jam di AX Series). AX Pro juga punya AI integration yang lebih dalam untuk meeting tools dan kolaborasi enterprise.",
+      },
+      {
+        question: "AVION AX Pro cocok untuk apa?",
+        answer:
+          "AX Pro Series dirancang untuk lingkungan dengan beban pemakaian tinggi dan deployment skala besar: auditorium kampus dan korporat, ruang pelatihan multi-sesi setiap hari, ruang command center, dan rollout enterprise di banyak cabang. Jika kebutuhan Anda adalah satu-dua ruang meeting biasa, AX Series standar sudah cukup. AX Pro mulai masuk akal saat panel beroperasi >8 jam per hari atau di lingkungan dengan pencahayaan tinggi.",
+      },
+      {
+        question: "Berapa lama AX Pro bisa dipakai per hari?",
+        answer:
+          "AVION AX Pro Series memiliki rating commercial-grade untuk pemakaian harian hingga 16 jam, mendekati operasi 24/7. Panel premium dan thermal management yang lebih baik membuat performa tetap konsisten sepanjang hari tanpa risiko overheating atau penurunan brightness.",
+      },
+      {
+        question: "Apakah AX Pro Series masih mendukung Dual OS?",
+        answer:
+          "Ya. AX Pro Series tetap memakai Dual OS Android + Windows (Intel i7 OPS), sama seperti AX Series. Perbedaannya ada di kualitas panel, brightness, daya tahan, dan AI processing — bukan di sistem operasi atau fitur kolaborasi dasar.",
+      },
+      {
+        question: "Berapa harga AVION AX Pro Series di Indonesia?",
+        answer:
+          "Harga AX Pro Series bervariasi tergantung ukuran, jumlah unit, dan paket instalasi. Untuk penawaran resmi dengan diskon volume (deployment multi-unit untuk satu gedung atau satu organisasi), hubungi tim sales AVION di +62-815-6390-5555. Tim akan melakukan site survey gratis untuk konfigurasi yang tepat.",
+      },
+    ],
   },
   {
     slug: "digital-signage",
@@ -132,6 +192,38 @@ export const PRODUCTS: Product[] = [
     image: "/assets/image/og-home.jpg",
     imageAlt: "AVION Digital Signage dengan Cloud CMS untuk multi-lokasi",
     whatsappMessage: "Halo, saya mau bertanya tentang Digital Signage AVION!",
+    faqs: [
+      {
+        question: "Apa itu AVION Digital Signage?",
+        answer:
+          "AVION Digital Signage adalah solusi terintegrasi yang terdiri dari hardware display profesional + Cloud CMS (Content Management System) berbasis web. Cocok untuk menampilkan konten visual seperti menu, promosi, informasi gedung, jadwal, atau iklan di banyak lokasi secara terpusat. Dipakai oleh retail, hotel, rumah sakit, perkantoran, restoran, dan transportasi publik.",
+      },
+      {
+        question: "Apakah CMS-nya berbasis cloud?",
+        answer:
+          "Ya. AVION Digital Signage memakai Cloud CMS yang bisa diakses dari mana saja lewat browser atau mobile app. Anda bisa menjadwalkan konten, mengubah pesan secara real-time, monitoring status setiap layar (online/offline), dan mengelola jaringan signage multi-lokasi tanpa harus hadir di tempat fisik.",
+      },
+      {
+        question: "Berapa banyak layar yang bisa dikelola dengan satu dashboard?",
+        answer:
+          "Tidak ada batasan teknis jumlah layar per akun. AVION Digital Signage dirancang untuk skala enterprise — bisa mengelola dari 1 layar di toko kecil hingga ratusan layar di chain retail, jaringan hotel, atau rumah sakit. Pricing dan paket disesuaikan dengan jumlah layar dan kebutuhan fitur. Hubungi tim sales untuk skema lisensi.",
+      },
+      {
+        question: "Format konten apa saja yang didukung Digital Signage AVION?",
+        answer:
+          "AVION Digital Signage mendukung berbagai format: gambar (JPG, PNG, WebP), video 4K UHD (MP4, MOV), konten HTML5 interaktif, RSS feed untuk berita atau pengumuman otomatis, dan teks dinamis dengan template branded. Anda juga bisa menjadwalkan rotasi konten per hari, per jam, atau per lokasi.",
+      },
+      {
+        question: "Bisa pakai layar non-AVION untuk Digital Signage?",
+        answer:
+          "Cloud CMS AVION dioptimalkan untuk hardware AVION agar performa, reliability, dan support terjamin. Untuk integrasi dengan display brand lain, kami menyediakan opsi konsultasi custom — silakan diskusikan kebutuhan integrasi Anda dengan tim teknis AVION untuk mengkaji kompatibilitas.",
+      },
+      {
+        question: "Apakah perlu internet 24/7?",
+        answer:
+          "Konten yang sudah dijadwalkan tetap tampil meski koneksi internet sementara terputus karena di-cache di player. Internet dibutuhkan untuk update konten, sinkronisasi jadwal, dan monitoring real-time. Untuk lokasi dengan koneksi tidak stabil, AVION mendukung mode hybrid online/offline.",
+      },
+    ],
   },
   {
     slug: "broadcast",

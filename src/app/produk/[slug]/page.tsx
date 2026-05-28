@@ -9,7 +9,7 @@ import {
 } from "@/lib/products";
 import { buildMetadata } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
-import { productSchema, breadcrumbSchema } from "@/lib/schema";
+import { productSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import Breadcrumb from "@/components/produk/detail/Breadcrumb";
 import CTABanner from "@/components/sections/CTABanner";
 
@@ -71,6 +71,9 @@ export default async function ProductDetailPage({
               url: b.href ?? `/produk/${product.slug}`,
             })),
           ),
+          ...(product.faqs && product.faqs.length > 0
+            ? [faqSchema(product.faqs)]
+            : []),
         ]}
       />
 
@@ -318,6 +321,84 @@ export default async function ProductDetailPage({
             </table>
           </div>
         </section>
+
+        {/* FAQ */}
+        {product.faqs && product.faqs.length > 0 && (
+          <section style={{ marginBottom: "4rem" }} aria-labelledby="faq-heading">
+            <style>{`
+              .avion-faq summary::-webkit-details-marker { display: none; }
+              .avion-faq summary { list-style: none; }
+              .avion-faq details[open] summary .avion-faq-icon::before { content: "−"; }
+              .avion-faq details:not([open]) summary .avion-faq-icon::before { content: "+"; }
+            `}</style>
+            <h2
+              id="faq-heading"
+              style={{
+                fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.015em",
+                color: "var(--text)",
+                margin: "0 0 1.5rem",
+              }}
+            >
+              Pertanyaan Umum tentang {product.shortName}
+            </h2>
+            <div className="avion-faq" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              {product.faqs.map((faq, i) => (
+                <details
+                  key={faq.question}
+                  open={i === 0}
+                  style={{
+                    background: "var(--surface-md)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                    padding: "0.25rem 1.1rem",
+                    backdropFilter: "blur(12px)",
+                  }}
+                >
+                  <summary
+                    style={{
+                      cursor: "pointer",
+                      padding: "0.85rem 0",
+                      fontSize: "1rem",
+                      fontWeight: 600,
+                      color: "var(--text)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "1rem",
+                    }}
+                  >
+                    <span>{faq.question}</span>
+                    <span
+                      aria-hidden
+                      className="avion-faq-icon"
+                      style={{
+                        flexShrink: 0,
+                        fontSize: "1.25rem",
+                        color: "var(--text-muted)",
+                        fontFamily: "var(--font-dm-mono)",
+                        lineHeight: 1,
+                        width: "1ch",
+                        textAlign: "center",
+                      }}
+                    />
+                  </summary>
+                  <div
+                    style={{
+                      fontSize: "0.95rem",
+                      lineHeight: 1.75,
+                      color: "var(--text-sub)",
+                      padding: "0 0 0.85rem",
+                    }}
+                  >
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Related products */}
         <RelatedProducts currentSlug={product.slug} />
